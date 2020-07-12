@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using RPG.Combat;
 
 namespace RPG.Movement 
 {
@@ -10,8 +11,9 @@ namespace RPG.Movement
     {
         // Start is called before the first frame update
         // [SerializeField] Transform target;
-
-        Ray lastRay;
+        // Ray lastRay;
+        NavMeshAgent navMeshAgent;
+      
 
         // Update is called once per frame
         void Update()
@@ -24,11 +26,27 @@ namespace RPG.Movement
             AnimationUpdate();
         }
 
-
-
+        private void Start()
+        {
+            navMeshAgent=GetComponent<NavMeshAgent>();
+        }
+        public void Stop() 
+        {
+            navMeshAgent.isStopped = true;
+            print("stopped");
+        }
+        public void StartMoveAction(Vector3 destination) 
+        {
+            GetComponent<Fighter>().Cancel();
+            MoveTo(destination);
+        }
         public void MoveTo(Vector3 destination)
         {
-            GetComponent<NavMeshAgent>().destination = destination;
+            print("moving");
+            print(navMeshAgent.isStopped);
+            
+            navMeshAgent.destination = destination;
+            navMeshAgent.isStopped = false;
         }
 
         private void AnimationUpdate()

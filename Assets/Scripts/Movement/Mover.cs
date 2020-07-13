@@ -8,7 +8,7 @@ using RPG.Core;
 namespace RPG.Movement 
 {
 
-    public class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour , IAction
     {
         // Start is called before the first frame update
         // [SerializeField] Transform target;
@@ -31,15 +31,16 @@ namespace RPG.Movement
         {
             navMeshAgent=GetComponent<NavMeshAgent>();
         }
-        public void Stop() 
+        public void Cancel() 
         {
             navMeshAgent.isStopped = true;
            // print("stopped");
         }
+
         public void StartMoveAction(Vector3 destination) 
         {
+         
             GetComponent<ActionScheduler>().StartAction(this);
-            GetComponent<Fighter>().Cancel();
             MoveTo(destination);
         }
         public void MoveTo(Vector3 destination)

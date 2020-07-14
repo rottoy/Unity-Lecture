@@ -24,13 +24,16 @@ namespace RPG.Control
             {
                 
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-              //  print(target);
-                if (target == null) continue;
+                //  print(target);
+                //  if (target == null) continue;
+
+                if (!GetComponent<Fighter>().CanAttack(target)) continue;
 
                 if (Input.GetMouseButtonDown(0)) 
                 {
 
-                   //print(target);
+                    //print(target);
+                    
                    GetComponent<Fighter>().Attack(target);
                     
                 }

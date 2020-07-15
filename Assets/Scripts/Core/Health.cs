@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Combat
+namespace RPG.Core
 {
 
    
@@ -11,6 +11,7 @@ namespace RPG.Combat
 
         [SerializeField] float health = 100f;
         bool isDeath = false;
+
 
         public bool isDead() 
         {
@@ -33,7 +34,7 @@ namespace RPG.Combat
             if (isDeath) return;
             isDeath = true;
             GetComponent<Animator>().SetTrigger("die");
-
+            GetComponent<ActionScheduler>().CancelCurrentAction();
         }
     }
 

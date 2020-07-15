@@ -14,11 +14,18 @@ namespace RPG.Movement
         // [SerializeField] Transform target;
         // Ray lastRay;
         NavMeshAgent navMeshAgent;
-      
-
+        Health health;
+        private void Start()
+        {
+            health = GetComponent<Health>();
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
         // Update is called once per frame
         void Update()
         {
+
+            navMeshAgent.enabled = !health.isDead();
+            
             //Player 에게만 있는 로직이므로 따로 빼서 사용.
             //if (Input.GetMouseButtonDown(0))
             //{
@@ -27,10 +34,7 @@ namespace RPG.Movement
             AnimationUpdate();
         }
 
-        private void Start()
-        {
-            navMeshAgent=GetComponent<NavMeshAgent>();
-        }
+      
         public void Cancel() 
         {
             navMeshAgent.isStopped = true;

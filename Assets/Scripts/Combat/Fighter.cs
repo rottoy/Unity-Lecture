@@ -23,7 +23,7 @@ namespace RPG.Combat
             if (!GetIsInRange()) //범위안에 없으면 그 곳으로 먼저 이동
             {
                // print("hi");
-                GetComponent<Mover>().MoveTo(target.transform.position);
+                GetComponent<Mover>().MoveTo(target.transform.position,1f);
             }
             else // 다 도착했으면 이동을 멈추고 때리기 애니메이션 실행
             {
